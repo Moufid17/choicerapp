@@ -37,8 +37,11 @@ class _ChoiceItemState extends State<ChoiceItem> {
         _changeColor();
       },
       child: Container(
-        color: _color,
         padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: _color,
+        ),
         // Change button text when light changes state.
         child: Text(widget.title),
       ),

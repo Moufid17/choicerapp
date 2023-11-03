@@ -4,6 +4,7 @@ import 'choice_item.dart';
 
 class Header extends StatelessWidget {
   List<String> elements;
+
   Header({super.key, required this.elements});
 
   @override
@@ -15,11 +16,25 @@ class Header extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.all(8),
-          child: Wrap(
-              spacing: 4, // Espacement horizontal
-              runSpacing: 6, // Espacement vertical
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                for (var element in elements) ChoiceItem(isTap: false, title: element,),
+                const Text(
+                  'Vos choix :',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 36),
+                ),
+                if (elements.isEmpty)
+                  const Text('Cliquez sur les choix ci-dessous !')
+                else
+                  Wrap(
+                  spacing: 4, // Espacement horizontal
+                  runSpacing: 6, // Espacement vertical
+                  children: [
+                    ...elements.map((element) => ChoiceItem(isTap: false, title: element))]
+                  ),
               ]
           ),
         ),

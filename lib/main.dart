@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(const MyApp());
 }
-
+List<String> headerElement = [];
 class MyApp extends StatefulWidget {
 
   const MyApp({super.key});
@@ -15,18 +15,25 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<String> headerElement = [];
-  List<String> footerElement = ["cinema", "pétanque", 'fitness'];
+
   String titleD = '';
 
-  void addElementToHeader (String value) {
+  void addElementToHeader (String value, bool isAdding) {
     setState(() {
       titleD = value;
+      if (isAdding) {
+        print("IsAdding => $isAdding | Elements => $headerElement");
+        headerElement.add(value);
+      } else {
+        headerElement = headerElement.where((e) => e != value).toList();
+        print("IsAdding => $isAdding | Elements => $headerElement");
+      }
     });
   }
+
+
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       home: Scaffold(
         body: Column(
@@ -35,11 +42,11 @@ class _MyAppState extends State<MyApp> {
 
                 child: Container(
                   width: double.infinity,
-                  color: Colors.purple,
+                  color: Colors.yellow,
                   child: Center(child: Text(titleD)),
                 )
             ),
-            //const Expanded(child: Header()),
+            Expanded(child: Header(elements: headerElement,)),
             Expanded(child: Footer(h: titleD, addElement: addElementToHeader)),
           ],
         ),

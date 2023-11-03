@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'choice_item.dart';
 
 class Header extends StatelessWidget {
-  const Header({super.key});
+  List<String> elements;
+  Header({super.key, required this.elements});
 
   @override
   Widget build(BuildContext context) {
@@ -12,15 +13,13 @@ class Header extends StatelessWidget {
         Container(
           color: Colors.purple,
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.all(8),
           child: Wrap(
               spacing: 4, // Espacement horizontal
               runSpacing: 6, // Espacement vertical
               children: [
-                //ChoiceItem(isTap: false, title: 'cinema'),
-                Text('User'),
-                Text('User1'),
+                for (var element in elements) ChoiceItem(isTap: false, title: element,),
               ]
           ),
         ),

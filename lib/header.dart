@@ -12,14 +12,15 @@ class Header extends StatelessWidget {
         Container(
           color: Colors.purple,
         ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: Row(
-
+        const Padding(
+          padding: EdgeInsets.all(8),
+          child: Wrap(
+              spacing: 4, // Espacement horizontal
+              runSpacing: 6, // Espacement vertical
               children: [
-                ChoiceItem(isTap: false, title: 'cinema'),
-                ChoiceItem(isTap: false, title: 'pétanque'),
-                ChoiceItem(isTap: false, title: 'fitness'),
+                //ChoiceItem(isTap: false, title: 'cinema'),
+                Text('User'),
+                Text('User1'),
               ]
           ),
         ),

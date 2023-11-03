@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class ChoiceItem extends StatefulWidget {
   bool isTap = false;
   String title;
+  final Function(String) addElement;
 
-  ChoiceItem({super.key, required this.isTap, required this.title});
+  ChoiceItem({super.key, required this.isTap, required this.title, required this.addElement});
 
   @override
   State<ChoiceItem> createState() => _ChoiceItemState();
@@ -15,9 +16,11 @@ class _ChoiceItemState extends State<ChoiceItem> {
   void _changeColor() {
     if (widget.isTap) {
       setState(() {
-        // Toggle light when tapped.
         // widget.isTap = !widget.isTap;
+        // Toggle light when tapped.
         _color = _color == Colors.grey ? Colors.yellow : Colors.grey;
+        final String value = _color == Colors.yellow ? 'toto' : '';
+        widget.addElement(value);
       });
     }
   }

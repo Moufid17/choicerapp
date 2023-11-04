@@ -6,8 +6,6 @@ void main() {
   runApp(const MyApp());
 }
 
-List<String> headerElement = [];
-
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -16,12 +14,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  void addElementToHeader(String value, bool isAdding) {
+  List<String> headerElement = [];
+  void updateHeaderData(String value, bool isAdd) {
     setState(() {
-      if (isAdding) {
+      // Add Element
+      if (isAdd) {
         headerElement.add(value);
+      // Pop Element
       } else {
-        headerElement = headerElement.where((e) => e != value).toList();
+        // Filter header element with value
+        headerElement = headerElement.where((element) => element != value).toList();
       }
     });
   }
@@ -34,13 +36,15 @@ class _MyAppState extends State<MyApp> {
               child: Column(
                 children: [
                   Expanded(
-                    child: Header(
-                      elements: headerElement,
-                    )
+                    child: Header(elements: headerElement,)
                   ),
-                  Expanded(child: Footer(addElement: addElementToHeader)),
+                  Expanded(
+                      child: Footer(updateElement: updateHeaderData,)
+                  ),
                 ],
               ),
-    )));
+            )
+        )
+    );
   }
 }

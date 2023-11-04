@@ -3,28 +3,31 @@ import 'package:flutter/material.dart';
 class ChoiceItem extends StatefulWidget {
   bool isTap = false;
   String title;
-  final Function(String, bool)? addElement;
+  final Function(String, bool)? updateElement;
 
-  ChoiceItem({super.key, required this.isTap, required this.title, this.addElement});
+  ChoiceItem({super.key, required this.isTap, required this.title, this.updateElement});
 
   @override
   State<ChoiceItem> createState() => _ChoiceItemState();
 }
 
 class _ChoiceItemState extends State<ChoiceItem> {
+  // Init element color
   Color _color = Colors.grey;
-  void _changeColor() {
+  // Toggle when an element is tapped.
+  void _toggleElementColorAndUpdateHeaderElement() {
     if (widget.isTap) {
       setState(() {
-        // widget.isTap = !widget.isTap;
-        // Toggle light when tapped.
-        _color = _color == Colors.grey ? Colors.yellow : Colors.grey;
-        final String value =  widget.title;
-        if (widget.addElement != null) {
+        // Check if update method is defined by ChoiceItem Parent widget
+        if (widget.updateElement != null) {
+          // Adding State
           if (_color == Colors.yellow ) {
-            widget.addElement!(value, true);
+            _color = Colors.grey;
+            widget.updateElement!(widget.title, false);
+          // Removing State
           } else {
-            widget.addElement!(value, false);
+            _color = Colors.yellow;
+            widget.updateElement!(widget.title, true);
           }
         }
       });
@@ -34,7 +37,7 @@ class _ChoiceItemState extends State<ChoiceItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _changeColor();
+        _toggleElementColorAndUpdateHeaderElement();
       },
       child: Container(
         padding: const EdgeInsets.all(8),

@@ -2,21 +2,25 @@ import 'package:choicerapp/choice_item.dart';
 import 'package:flutter/material.dart';
 
 class Footer extends StatefulWidget {
-  final Function(String, bool) addElement;
-  const Footer({super.key, required this.addElement});
+  final Function(String, bool) updateElement;
+
+  const Footer({super.key, required this.updateElement});
 
   @override
   State<Footer> createState() => _FooterState();
 }
 
 class _FooterState extends State<Footer> {
-  void addElementToHeader (String value, bool isAdd) {
+
+  void updateHeaderData (String value, bool isAdd) {
     setState(() {
-      widget.addElement(value, isAdd);
+      widget.updateElement(value, isAdd);
     });
   }
+
   @override
   Widget build(BuildContext context) {
+    // Init header elements
     List<String> footerElement = ["cinema", "pétanque", 'fitness', 'League of legends', 'basket', 'shopping', 'programmation'];
     return Stack(
       children: [
@@ -31,7 +35,8 @@ class _FooterState extends State<Footer> {
               spacing: 8, // Espacement horizontal
               runSpacing: 8, // Espacement vertical
               children: [
-                for (var element in footerElement) ChoiceItem(isTap: true, title: element, addElement: addElementToHeader),
+                // Spread footer elements as ChoiceItem
+                ...footerElement.map((element) => ChoiceItem(isTap: true, title: element, updateElement: updateHeaderData)),
               ]),
         ),
       ],

@@ -1,10 +1,11 @@
+import 'package:choicerapp/core/models/choice.dart';
 import 'package:flutter/material.dart';
 import 'choice_item.dart';
 
 class Header extends StatelessWidget {
-  List<String> elements = [];
+  final List<Choice> elements;
 
-  Header({super.key, required this.elements});
+  const Header({super.key, required this.elements});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class Header extends StatelessWidget {
                     runSpacing: 6, // Espacement vertical
                     children: [
                       // Spread header elements as ChoiceItem
-                      ...elements.map((element) => ChoiceItem(isTap: false, title: element))
+                      ...elements.map((element) => ChoiceItem(isOpen: true, element: element))
                     ]  // Wrap Children
                 ),
             ],  // Column Children

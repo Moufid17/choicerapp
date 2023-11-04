@@ -1,8 +1,9 @@
 import 'package:choicerapp/choice_item.dart';
+import 'package:choicerapp/core/models/choice.dart';
 import 'package:flutter/material.dart';
 
 class Footer extends StatefulWidget {
-  final Function(String, bool) updateElement;
+  final Function(Choice, bool) updateElement;
 
   const Footer({super.key, required this.updateElement});
 
@@ -12,7 +13,7 @@ class Footer extends StatefulWidget {
 
 class _FooterState extends State<Footer> {
 
-  void updateHeaderData (String value, bool isAdd) {
+  void updateHeaderData (Choice value, bool isAdd) {
     setState(() {
       widget.updateElement(value, isAdd);
     });
@@ -21,7 +22,15 @@ class _FooterState extends State<Footer> {
   @override
   Widget build(BuildContext context) {
     // Init header elements
-    List<String> footerElement = ["cinema", "pétanque", 'fitness', 'League of legends', 'basket', 'shopping', 'programmation'];
+    List<Choice> footerElement = [
+      Choice(title: 'Cinéma', description: 'Cinéma description'),
+      Choice(title: 'Pétanque', description: 'Pétanque description'),
+      Choice(title: 'Fitness', description: 'Fitness description'),
+      Choice(title: 'League of legends', description: 'League of legends description'),
+      Choice(title: 'Basket', description: 'Basket description'),
+      Choice(title: 'Shopping', description: 'Shopping description'),
+      Choice(title: 'Programmation', description: 'Programmation description'),
+    ];
     return Stack(
       children: [
         Container(
@@ -36,7 +45,7 @@ class _FooterState extends State<Footer> {
               runSpacing: 8, // Espacement vertical
               children: [
                 // Spread footer elements as ChoiceItem
-                ...footerElement.map((element) => ChoiceItem(isTap: true, title: element, updateElement: updateHeaderData)),
+                ...footerElement.map((element) => ChoiceItem(isOpen: false, element: element, updateElement: updateHeaderData)),
               ]),
         ),
       ],

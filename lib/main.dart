@@ -1,3 +1,4 @@
+import 'package:choicerapp/core/models/choice.dart';
 import 'package:choicerapp/footer.dart';
 import 'package:choicerapp/header.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<String> headerElement = [];
-  void updateHeaderData(String value, bool isAdd) {
+  List<Choice> headerElement = [];
+  void updateHeaderData(Choice value, bool isAdd) {
     setState(() {
       // Add Element
       if (isAdd) {
@@ -23,7 +24,7 @@ class _MyAppState extends State<MyApp> {
       // Pop Element
       } else {
         // Filter header element with value
-        headerElement = headerElement.where((element) => element != value).toList();
+        headerElement = headerElement.where((element) => element.title != value.title).toList();
       }
     });
   }

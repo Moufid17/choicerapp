@@ -1,10 +1,12 @@
 import 'package:choicerapp/core/models/choice.dart';
-import 'package:choicerapp/screen/choice_item_detail_screen.dart';
+import 'package:choicerapp/globals.dart';
+import 'package:choicerapp/screen/choice/choice_item_detail_screen.dart';
+import 'package:choicerapp/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ChoiceItem extends StatefulWidget {
   final bool isOpen; // Can open element details
-  //final String title;
   final Choice element;
   final void Function(Choice, bool)? updateElement;
 
@@ -15,20 +17,19 @@ class ChoiceItem extends StatefulWidget {
 }
 
 class _ChoiceItemState extends State<ChoiceItem> {
-  // Init element color
-  Color _color = Colors.grey;
+  Color _bgColor = Colors.yellow;
   // Toggle when an element is tapped.
-  void _toggleElementColorAndUpdateHeaderElement() {
+  void toggleElementColorAndUpdateHeaderElement() {
     setState(() {
       // Check if update method is defined by ChoiceItem Parent widget
       if (widget.updateElement != null) {
-        // Adding State
-        if (_color == Colors.yellow ) {
-          _color = Colors.grey;
-          widget.updateElement!(widget.element, false);
         // Removing State
+        if (_bgColor == Colors.grey ||  _bgColor == Colors.purple) {
+          _bgColor = Colors.yellow;
+          widget.updateElement!(widget.element, false);
+          // Adding State
         } else {
-          _color = Colors.yellow;
+          _bgColor =  Colors.grey;
           widget.updateElement!(widget.element, true);
         }
       }
@@ -37,7 +38,18 @@ class _ChoiceItemState extends State<ChoiceItem> {
 
   @override
   Widget build(BuildContext context) {
-    //Choice elementDetail = Choice(title: 'Basket', description: 'Basket Desc');
+    // Init element color
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    Color bgColor =   _bgColor;
+    if (_bgColor == Colors.grey || _bgColor == Colors.purple){
+        bgColor = Colors.yellow;
+    } else {
+      if (themeProvider.customTheme == 'light') {
+        bgColor = Colors.grey;
+      } else {
+        bgColor = Colors.purple;
+      }
+    }
     return GestureDetector(
       onTap: () {
         // Open details page
@@ -47,19 +59,18 @@ class _ChoiceItemState extends State<ChoiceItem> {
           );
         // Open details page
         } else {
-          _toggleElementColorAndUpdateHeaderElement();
+          toggleElementColorAndUpdateHeaderElement();
         }
-        
       },
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: _color,
+          color: bgColor,
         ),
         // Change button text when light changes state.
         child: Text(widget.element.title,
-            style: widget.isOpen ? const TextStyle(color: Colors.white) : null
+            style: TextStyle(color: widget.isOpen ?  Colors.white : Colors.black),
         ),
       ),
     );

@@ -1,6 +1,10 @@
 import 'package:choicerapp/choice_item.dart';
 import 'package:choicerapp/core/models/choice.dart';
+import 'package:choicerapp/globals.dart';
+import 'package:choicerapp/main.dart';
+import 'package:choicerapp/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Footer extends StatefulWidget {
   final Function(Choice, bool) updateElement;
@@ -21,6 +25,8 @@ class _FooterState extends State<Footer> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    bool isLight = themeProvider.customTheme == 'light';
     // Init header elements
     List<Choice> footerElement = [
       Choice(title: 'Cinéma', description: 'Cinéma description'),
@@ -34,7 +40,7 @@ class _FooterState extends State<Footer> {
     return Stack(
       children: [
         Container(
-          color: Colors.white,
+          color: themeProvider.customTheme == 'light' ? Colors.white : Colors.black54,
         ),
         Padding(
           padding: const EdgeInsets.all(8),

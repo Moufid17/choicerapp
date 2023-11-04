@@ -1,45 +1,47 @@
 import 'package:choicerapp/core/models/choice.dart';
+import 'package:choicerapp/globals.dart';
 import 'package:flutter/material.dart';
 
 class ChoiceItemDetailScreen extends StatelessWidget {
   final Choice elementDetail;
   const ChoiceItemDetailScreen({super.key, required this.elementDetail});
 
+
   @override
   Widget build(BuildContext context) {
-    const double textSize = 20;
+    final Color bgColor   =   Globals.customTheme == 'light' ? Colors.grey : Colors.black;
+    final Color textColor =   Globals.customTheme == 'light' ? Colors.black : Colors.white;
+    final Color btnColor  =   Globals.customTheme == 'light' ? Colors.white : Colors.black;
+    const double textSize =   20;
     return MaterialApp(
       home: Scaffold(
         body: SafeArea(
           child: Container(
             height: double.infinity,
             width: double.infinity,
-            color: Colors.grey,
+            color: bgColor,
             padding: const EdgeInsets.all(8),
             child: Wrap(
-              //crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 16,
-              //runSpacing: 16,
               direction: Axis.vertical,
-
               children: [
                 Wrap(
                   children: [
-                    const Text('Title : ',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: textSize),
+                    Text('Title : ',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: textSize, color: textColor),
                     ),
                     Text(elementDetail.title,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: textSize),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: textSize, color: textColor),
                     ),
                   ],
                 ),
                 Wrap(
                   children: [
-                    const Text('Description : ',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: textSize),
+                    Text('Description : ',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: textSize, color: textColor),
                     ),
                     Text(elementDetail.description,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: textSize),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: textSize, color: textColor),
                     ),
                   ],
                 ),
@@ -51,13 +53,13 @@ class ChoiceItemDetailScreen extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: textColor,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     // Change button text when light changes state.
-                    child: const Text('Retour',
+                    child: Text('Retour',
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 24,),
+                      style: TextStyle(color: btnColor, fontSize: 24,),
                     ),
                   ),
                 ),

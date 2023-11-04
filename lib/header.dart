@@ -1,5 +1,12 @@
+import 'dart:developer';
+
 import 'package:choicerapp/core/models/choice.dart';
+import 'package:choicerapp/globals.dart';
+import 'package:choicerapp/main.dart';
+import 'package:choicerapp/screen/components/button_switch.dart';
+import 'package:choicerapp/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'choice_item.dart';
 
 class Header extends StatelessWidget {
@@ -9,11 +16,13 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Stack(
       children: [
         Container(
-          color: Colors.deepPurpleAccent,
+          color: themeProvider.customTheme == 'light' ? Colors.deepPurpleAccent : Colors.blueGrey,
         ),
+        const ButtonSwitch(),
         Padding(
           padding: const EdgeInsets.all(8),
           child: Column(

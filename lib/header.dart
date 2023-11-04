@@ -1,8 +1,6 @@
 import 'dart:developer';
 
 import 'package:choicerapp/core/models/choice.dart';
-import 'package:choicerapp/globals.dart';
-import 'package:choicerapp/main.dart';
 import 'package:choicerapp/screen/components/button_switch.dart';
 import 'package:choicerapp/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -22,18 +20,23 @@ class Header extends StatelessWidget {
         Container(
           color: themeProvider.customTheme == 'light' ? Colors.deepPurpleAccent : Colors.blueGrey,
         ),
-        const ButtonSwitch(),
         Padding(
           padding: const EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Vos choix :',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 36
-                ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Vos choix :',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 36
+                    ),
+                  ),
+                  ButtonSwitch(),
+                ],
               ),
               if (elements.isEmpty)
                 const Text('Cliquez sur les choix ci-dessous !',

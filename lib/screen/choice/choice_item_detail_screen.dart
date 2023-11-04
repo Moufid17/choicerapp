@@ -1,17 +1,18 @@
 import 'package:choicerapp/core/models/choice.dart';
-import 'package:choicerapp/globals.dart';
+import 'package:choicerapp/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ChoiceItemDetailScreen extends StatelessWidget {
   final Choice elementDetail;
   const ChoiceItemDetailScreen({super.key, required this.elementDetail});
 
-
   @override
   Widget build(BuildContext context) {
-    final Color bgColor   =   Globals.customTheme == 'light' ? Colors.grey : Colors.black;
-    final Color textColor =   Globals.customTheme == 'light' ? Colors.black : Colors.white;
-    final Color btnColor  =   Globals.customTheme == 'light' ? Colors.white : Colors.black;
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final Color bgColor   =   themeProvider.customTheme == 'light' ? Colors.grey : Colors.black;
+    final Color textColor =   themeProvider.customTheme == 'light' ? Colors.black : Colors.white;
+    final Color btnColor  =   themeProvider.customTheme == 'light' ? Colors.white : Colors.black;
     const double textSize =   20;
     return MaterialApp(
       home: Scaffold(

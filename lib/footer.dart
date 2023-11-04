@@ -1,6 +1,5 @@
 import 'package:choicerapp/choice_item.dart';
 import 'package:choicerapp/core/models/choice.dart';
-import 'package:choicerapp/globals.dart';
 import 'package:choicerapp/main.dart';
 import 'package:choicerapp/theme_provider.dart';
 import 'package:flutter/material.dart';

@@ -1,19 +1,17 @@
 import 'package:choicerapp/core/models/choice.dart';
 import 'package:choicerapp/footer.dart';
-import 'package:choicerapp/globals.dart';
 import 'package:choicerapp/header.dart';
 import 'package:choicerapp/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  //runApp(const MyApp());
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => ThemeProvider()), // Ajoutez votre gestionnaire d'état ici
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
@@ -26,7 +24,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   List<Choice> headerElement = [];
   void updateHeaderData(Choice value, bool isAdd) {
     setState(() {
@@ -43,8 +40,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    Globals.customTheme = 'light';
     return MaterialApp(
+        theme: ThemeData(useMaterial3: true),
         home: Scaffold(
             body: SafeArea(
               child: Column(

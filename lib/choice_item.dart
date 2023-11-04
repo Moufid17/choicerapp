@@ -1,5 +1,4 @@
 import 'package:choicerapp/core/models/choice.dart';
-import 'package:choicerapp/globals.dart';
 import 'package:choicerapp/screen/choice/choice_item_detail_screen.dart';
 import 'package:choicerapp/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -23,11 +22,11 @@ class _ChoiceItemState extends State<ChoiceItem> {
     setState(() {
       // Check if update method is defined by ChoiceItem Parent widget
       if (widget.updateElement != null) {
-        // Removing State
+        // Removing element from header widget list
         if (_bgColor == Colors.grey ||  _bgColor == Colors.purple) {
           _bgColor = Colors.yellow;
           widget.updateElement!(widget.element, false);
-          // Adding State
+          // Adding element from header widget list
         } else {
           _bgColor =  Colors.grey;
           widget.updateElement!(widget.element, true);
